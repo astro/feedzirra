@@ -56,3 +56,15 @@ end
 def sample_wfw_feed
   load_sample("PaulDixExplainsNothingWFW.xml")
 end
+
+def sample_corrupt_encoding_feed
+  load_sample("corrupt_encoding.xml")
+end
+
+def sample_corrupt_multi_encoding_feed
+  load_sample("corrupt_multi_encoding.xml")
+end
+
+def sample_atomtype_feed(type)
+  load_sample("atomtype_#{type}.xml")
+end

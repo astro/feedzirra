@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Feedzirra::Feed do
@@ -71,6 +72,29 @@ describe Feedzirra::Feed do
       feed.title.should == "Sam Harris: Author, Philosopher, Essayist, Atheist"
       feed.entries.first.published.to_s.should == "Tue Jan 13 17:20:28 UTC 2009"
       feed.entries.size.should == 10
+    end
+
+    context "on different ATOM content types" do
+      it "should parse text type" do
+        feed = Feedzirra::Feed.parse(sample_atomtype_feed("text"))
+        feed.entries.first.content.should == "Content &amp; Text"
+      end
+      it "should parse html type" do
+        feed = Feedzirra::Feed.parse(sample_atomtype_feed("html"))
+        feed.entries.first.content.should == "<p>Content</p>"
+      end
+      it "should parse xhtml type" do
+        feed = Feedzirra::Feed.parse(sample_atomtype_feed("xhtml"))
+        feed.entries.first.content.should == "<p>Content</p>"
+      end
+    end
+
+    context "when encountering corrupted feeds" do
+      it "should detect non-UTF8 declared as UTF8" do
+        feed = Feedzirra::Feed.parse(sample_corrupt_encoding_feed)
+        feed.title.should == "Feed: äöü"
+        feed.entries.first.title.should == "Entry: ÄÖÜ"
+      end
     end
   end
 
