@@ -52,7 +52,7 @@ describe Feedzirra::Feed do
       it "should parse an itunes feed" do
         feed = Feedzirra::Feed.parse(sample_itunes_feed)
         feed.title.should == "All About Everything"
-        feed.entries.first.published.to_s.should == "Wed, 15 Jun 2005 19:00:00 GMT"
+        feed.entries.first.published.should == Time.parse("Wed, 15 Jun 2005 19:00:00 GMT")
         feed.entries.first.itunes_author.should == "John Doe"
         feed.entries.size.should == 3
       end
