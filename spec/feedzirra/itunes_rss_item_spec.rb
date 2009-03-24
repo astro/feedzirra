@@ -44,5 +44,9 @@ describe Feedzirra::ITunesRSSItem do
   it "should parse the keywords" do
     @item.itunes_keywords.should == "salt, pepper, shaker, exciting"
   end  
+  
+  it "should parse content:encoded" do
+    @item.content.should == "<p>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!</p>"
+  end
 
 end
