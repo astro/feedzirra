@@ -8,7 +8,7 @@ module Feedzirra
     element :guid
     element :title
     element :link, :as => :url
-    element :description, :as => :summary
+    element :description, :as => :content
     element :pubDate, :as => :published
     element :"content:encoded", :as => :content
 
