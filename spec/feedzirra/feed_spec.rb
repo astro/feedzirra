@@ -160,7 +160,7 @@ describe Feedzirra::Feed do
         @cmock = stub('cmock', :header_str => '', :body_str => @paul_feed[:xml] )
         @multi = stub('curl_multi', :add => true, :perform => true)
         @curl_easy = stub('curl_easy')
-        @curl = stub('curl', :headers => {}, :follow_location= => true, :on_failure => true)
+        @curl = stub('curl', :headers => {}, :follow_location= => true, :on_failure => true, :timeout= => true)
         @curl.stub!(:on_success).and_yield(@cmock)
         
         Curl::Multi.stub!(:new).and_return(@multi)
@@ -206,12 +206,12 @@ describe Feedzirra::Feed do
         Curl::Multi.stub!(:new).and_return(multi)
         
         paul_response = stub('paul_response', :header_str => '', :body_str => @paul_feed[:xml] )
-        trotter_response = stub('trotter_response', :header_str => '', :body_str => @trotter_feed[:xml] )
+        trotter_response = stub('trotter_response', :header_str => '', :body_str => @trotter_feed[:xml])
 
-        paul_curl = stub('paul_curl', :headers => {}, :follow_location= => true, :on_failure => true)
+        paul_curl = stub('paul_curl', :headers => {}, :follow_location= => true, :on_failure => true, :timeout= => true)
         paul_curl.stub!(:on_success).and_yield(paul_response)
 
-        trotter_curl = stub('trotter_curl', :headers => {}, :follow_location= => true, :on_failure => true)
+        trotter_curl = stub('trotter_curl', :headers => {}, :follow_location= => true, :on_failure => true, :timeout= => true)
         trotter_curl.stub!(:on_success).and_yield(trotter_response)
         
         Curl::Easy.should_receive(:new).with(@paul_feed[:url]).ordered.and_yield(paul_curl)
@@ -252,6 +252,11 @@ describe Feedzirra::Feed do
       it "should set if modified since as an option if passed" do
         Feedzirra::Feed.add_url_to_multi(@multi, @paul_feed[:url], [], {}, :if_modified_since => Time.parse("Jan 25 2009 04:10:32 GMT"))
         @easy_curl.headers["If-Modified-Since"].should == 'Sun, 25 Jan 2009 04:10:32 GMT'
+      end
+      
+      it "should set tiemout to the passed value" do
+        @easy_curl.should_receive(:timeout=).with(8)
+        Feedzirra::Feed.add_url_to_multi(@multi, @paul_feed[:url], [], {}, {:timeout =>8})
       end
 
       it 'should set follow location to true' do
@@ -393,6 +398,11 @@ describe Feedzirra::Feed do
       end
 
       it "should set if modified since as an option if passed"
+      
+      it "should set timeout to the right value" do
+        @easy_curl.should_receive(:timeout=).with(8)
+        Feedzirra::Feed.add_feed_to_multi(@multi, @feed, [], {}, {:timeout => 8})
+      end
       
       it 'should set follow location to true' do
         @easy_curl.should_receive(:follow_location=).with(true)

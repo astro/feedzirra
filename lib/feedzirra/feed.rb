@@ -3,6 +3,7 @@ module Feedzirra
   
   class Feed
     USER_AGENT = "feedzirra http://github.com/pauldix/feedzirra/tree/master"
+    TIMEOUT    = 30
     
     # Takes a raw XML feed and attempts to parse it. If no parser is available a Feedzirra::NoParserAvailable exception is raised.
     #
@@ -101,6 +102,7 @@ module Feedzirra
           curl.headers["If-Modified-Since"] = options[:if_modified_since].httpdate if options.has_key?(:if_modified_since)
           curl.headers["If-None-Match"]     = options[:if_none_match] if options.has_key?(:if_none_match)
           curl.headers["Accept-encoding"]   = 'gzip, deflate'
+          curl.timeout                      = (options[:timeout] || TIMEOUT)
           curl.follow_location = true
           curl.userpwd = options[:http_authentication].join(':') if options.has_key?(:http_authentication)
 
@@ -217,6 +219,7 @@ module Feedzirra
         curl.headers["If-Modified-Since"] = options[:if_modified_since].httpdate if options.has_key?(:if_modified_since)
         curl.headers["If-None-Match"]     = options[:if_none_match] if options.has_key?(:if_none_match)
         curl.headers["Accept-encoding"]   = 'gzip, deflate'
+        curl.timeout                      = (options[:timeout] || TIMEOUT)
         curl.follow_location = true
         curl.userpwd = options[:http_authentication].join(':') if options.has_key?(:http_authentication)
         
@@ -267,6 +270,7 @@ module Feedzirra
         curl.headers["User-Agent"]        = (options[:user_agent] || USER_AGENT)
         curl.headers["If-Modified-Since"] = feed.last_modified.httpdate if feed.last_modified
         curl.headers["If-None-Match"]     = feed.etag if feed.etag
+        curl.timeout                      = (options[:timeout] || TIMEOUT)
         curl.userpwd = options[:http_authentication].join(':') if options.has_key?(:http_authentication)
         curl.follow_location = true
 
