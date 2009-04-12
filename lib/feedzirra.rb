@@ -18,6 +18,8 @@ require 'feedzirra/feed_utilities'
 require 'feedzirra/feed_entry_utilities'
 require 'feedzirra/feed'
 
+require 'feedzirra/push_parser'
+
 require 'feedzirra/rss_entry'
 require 'feedzirra/itunes_rss_owner'
 require 'feedzirra/itunes_rss_item'
