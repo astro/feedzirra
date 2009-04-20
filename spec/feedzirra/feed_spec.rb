@@ -257,11 +257,6 @@ describe Feedzirra::Feed do
         @easy_curl.headers["If-Modified-Since"].should == 'Sun, 25 Jan 2009 04:10:32 GMT'
       end
       
-      it "should set tiemout to the passed value" do
-        @easy_curl.should_receive(:timeout=).with(8)
-        Feedzirra::Feed.add_url_to_multi(@multi, @paul_feed[:url], [], {}, {:timeout =>8})
-      end
-
       it 'should set follow location to true' do
         @easy_curl.should_receive(:follow_location=).with(true)
         Feedzirra::Feed.add_url_to_multi(@multi, @paul_feed[:url], [], {}, {})

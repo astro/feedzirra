@@ -34,7 +34,7 @@ describe Feedzirra::Parser::ITunesRSSItem do
   end  
 
   it "should parse the published date" do
-    @item.published.should == Time.parse("Wed Jun 15 19:00:00 UTC 2005")
+    @item.published.should == Time.parse("Wed, 15 Jun 2005 19:00:00 GMT")
   end  
 
   it "should parse the duration" do
@@ -46,7 +46,7 @@ describe Feedzirra::Parser::ITunesRSSItem do
   end  
   
   it "should parse content:encoded" do
-    @item.content.should == "<p>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!</p>"
+    @item.summary.should == "<p>This week we talk about salt and pepper shakers, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!</p>"
   end
 
 end
