@@ -2,7 +2,7 @@
  
 Gem::Specification.new do |s|
   s.name = %q{feedzirra}
-  s.version = "0.0.8.20090420"
+  s.version = "0.0.8"
  
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Paul Dix"]
@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
     "spec/feedzirra/feed_entry_utilities_spec.rb",
     "spec/feedzirra/feed_spec.rb",
     "spec/feedzirra/feed_utilities_spec.rb",
-    "spec/feedzirra/parser/push_parser.rb",
+    "spec/feedzirra/parser/push_parser_spec.rb",
     "spec/feedzirra/parser/atom_entry_spec.rb",
     "spec/feedzirra/parser/atom_feed_burner_entry_spec.rb",
     "spec/feedzirra/parser/atom_feed_burner_spec.rb",
