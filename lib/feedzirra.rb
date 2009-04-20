@@ -17,6 +17,7 @@ require 'core_ext/string'
 require 'feedzirra/feed_utilities'
 require 'feedzirra/feed_entry_utilities'
 require 'feedzirra/feed'
+require 'feedzirra/push_parser'
 
 require 'feedzirra/push_parser'
 

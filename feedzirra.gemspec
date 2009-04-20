@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
     "lib/feedzirra/itunes_rss.rb",
     "lib/feedzirra/itunes_rss_item.rb",
     "lib/feedzirra/itunes_rss_owner.rb",
+    "lib/feedzirra/push_parser.rb",
     "lib/feedzirra/rss.rb",
     "lib/feedzirra/rss_entry.rb",
     "lib/feedzirra/feed_utilities.rb",
@@ -51,14 +52,14 @@ Gem::Specification.new do |s|
  
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<nokogiri>, ["> 0.0.0"])
-      s.add_runtime_dependency(%q<pauldix-sax-machine>, [">= 0.0.12"])
+      s.add_runtime_dependency(%q<sax-machine>, [">= 0.0.12"])
       s.add_runtime_dependency(%q<taf2-curb>, [">= 0.2.3"])
       s.add_runtime_dependency(%q<builder>, [">= 2.1.2"])
       s.add_runtime_dependency(%q<activesupport>, [">=2.0.0"])
       s.add_runtime_dependency(%q<mdalessio-dryopteris>, [">= 0.0.0"])
     else
       s.add_dependency(%q<nokogiri>, ["> 0.0.0"])
-      s.add_dependency(%q<pauldix-sax-machine>, [">= 0.0.12"])
+      s.add_dependency(%q<sax-machine>, [">= 0.0.12"])
       s.add_dependency(%q<taf2-curb>, [">= 0.2.3"])
       s.add_dependency(%q<builder>, [">= 2.1.2"])
       s.add_dependency(%q<activesupport>, [">=2.0.0"])
@@ -66,7 +67,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<nokogiri>, ["> 0.0.0"])
-    s.add_dependency(%q<pauldix-sax-machine>, [">= 0.0.12"])
+    s.add_dependency(%q<sax-machine>, [">= 0.0.12"])
     s.add_dependency(%q<taf2-curb>, [">= 0.2.3"])
     s.add_dependency(%q<builder>, [">= 2.1.2"])
     s.add_dependency(%q<activesupport>, [">=2.0.0"])
