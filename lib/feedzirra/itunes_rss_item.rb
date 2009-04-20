@@ -3,13 +3,14 @@ module Feedzirra
   # Source: http://www.apple.com/itunes/whatson/podcasts/specs.html
   class ITunesRSSItem
     include SAXMachine
-    include FeedUtilities
+    include FeedEntryUtilities
     element :author
     element :guid
     element :title
     element :link, :as => :url
-    element :description, :as => :summary
+    element :description, :as => :content
     element :pubDate, :as => :published
+    element :"content:encoded", :as => :content
 
     # If author is not present use author tag on the item
     element :"itunes:author", :as => :itunes_author

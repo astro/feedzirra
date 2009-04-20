@@ -20,6 +20,12 @@ module Feedzirra
     end
     
     ##
+    # Summary is @summary of @content of nil.
+    def summary
+      @summary || @content
+    end
+    
+    ##
     # Writter for published. By default, we keep the "oldest" publish time found.
     def published=(val)
       parsed = parse_datetime(val)
